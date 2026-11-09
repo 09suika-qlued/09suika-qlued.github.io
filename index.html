@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portofolio – Nama Anda</title>
+<meta name="description" content="Portofolio pribadi: profil, keahlian, proyek, dan kontak.">
+<style>
+  :root{
+    --bg:#0f1115; --surface:#181b22; --text:#e8eaf0; --muted:#9aa1b2;
+    --accent:#5eead4; --accent-2:#818cf8; --border:#262a35; --radius:16px;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f8fb; --surface:#ffffff; --text:#14171f; --muted:#5b6275;
+    --accent:#0d9488; --accent-2:#4f46e5; --border:#e3e6ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.65;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1000px;margin:0 auto;padding:0 20px}
+  section{padding:88px 0}
+  h2{font-size:1.7rem;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:36px}
+
+  /* Navbar */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:700;letter-spacing:.3px}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{color:var(--muted);font-size:.95rem;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  #theme{
+    background:none;border:1px solid var(--border);color:var(--text);
+    width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;
+  }
+
+  /* Hero */
+  .hero{padding:110px 0 90px}
+  .hero .tag{
+    display:inline-block;padding:6px 14px;border:1px solid var(--border);
+    border-radius:999px;color:var(--muted);font-size:.85rem;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.15;margin-bottom:18px}
+  .grad{background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);max-width:560px;font-size:1.1rem;margin-bottom:30px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    padding:12px 24px;border-radius:12px;font-weight:600;border:1px solid var(--border);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#0b0d12;border:none}
+
+  /* Tentang */
+  .about{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center}
+  .avatar{
+    width:200px;height:200px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-size:4rem;font-weight:700;color:#0b0d12;
+  }
+  .about p{color:var(--muted);margin-bottom:14px}
+  .stats{display:flex;gap:32px;margin-top:20px;flex-wrap:wrap}
+  .stats b{display:block;font-size:1.6rem;color:var(--accent)}
+  .stats small{color:var(--muted)}
+
+  /* Keahlian */
+  .skills{display:flex;flex-wrap:wrap;gap:10px}
+  .skill{
+    padding:9px 18px;border-radius:999px;background:var(--surface);
+    border:1px solid var(--border);font-size:.95rem;
+  }
+
+  /* Proyek */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;transition:transform .25s,border-color .25s;
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--accent)}
+  .thumb{height:150px;display:grid;place-items:center;font-size:2.6rem}
+  .t1{background:linear-gradient(135deg,#0d9488,#0e7490)}
+  .t2{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+  .t3{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+  .card-body{padding:20px}
+  .card h3{margin-bottom:6px;font-size:1.1rem}
+  .card p{color:var(--muted);font-size:.93rem;margin-bottom:14px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chips span{font-size:.78rem;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);
+    padding:3px 10px;border-radius:999px}
+
+  /* Pengalaman */
+  .timeline{border-left:2px solid var(--border);padding-left:26px}
+  .item{position:relative;margin-bottom:30px}
+  .item::before{
+    content:"";position:absolute;left:-33px;top:7px;width:12px;height:12px;
+    border-radius:50%;background:var(--accent);
+  }
+  .item small{color:var(--muted)}
+  .item h3{font-size:1.05rem;margin:2px 0 4px}
+  .item p{color:var(--muted);font-size:.95rem}
+
+  /* Kontak */
+  form{display:grid;gap:14px;max-width:560px}
+  input,textarea{
+    width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);font:inherit;
+  }
+  input:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+  textarea{min-height:130px;resize:vertical}
+  .social{display:flex;gap:18px;margin-top:26px;color:var(--muted)}
+  .social a:hover{color:var(--accent)}
+
+  footer{border-top:1px solid var(--border);padding:26px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+  @media (max-width:700px){
+    .nav-links a:not(#theme){display:none}
+    .about{grid-template-columns:1fr;text-align:center;justify-items:center}
+    .stats{justify-content:center}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">nama<span>.dev</span></a>
+      <div class="nav-links">
+        <a href="#tentang">Tentang</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#kontak">Kontak</a>
+        <button id="theme" aria-label="Ganti tema">🌙</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="tag">👋 Terbuka untuk peluang baru</span>
+      <h1>Halo, saya <span class="grad">Nama Anda</span><br>Web Developer.</h1>
+      <p>Saya membangun situs web yang cepat, rapi, dan mudah digunakan. Mari wujudkan ide Anda menjadi produk digital nyata.</p>
+      <div class="btns">
+        <a href="#proyek" class="btn primary">Lihat Proyek</a>
+        <a href="#kontak" class="btn">Hubungi Saya</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="container">
+      <h2>Tentang Saya</h2>
+      <p class="sub">Sedikit cerita tentang saya.</p>
+      <div class="about">
+        <div class="avatar">N</div>
+        <div>
+          <p>Saya seorang pengembang web dengan minat pada antarmuka yang bersih dan pengalaman pengguna yang baik. Saya senang belajar teknologi baru dan memecahkan masalah lewat kode.</p>
+          <p>Di luar pekerjaan, saya suka membaca, berolahraga, dan berbagi ilmu di komunitas.</p>
+          <div class="stats">
+            <div><b>3+</b><small>Tahun pengalaman</small></div>
+            <div><b>20+</b><small>Proyek selesai</small></div>
+            <div><b>10+</b><small>Klien puas</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <div class="container">
+      <h2>Keahlian</h2>
+      <p class="sub">Teknologi yang biasa saya gunakan.</p>
+      <div class="skills">
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Node.js</span>
+        <span class="skill">Git &amp; GitHub</span>
+        <span class="skill">Figma</span>
+        <span class="skill">Responsive Design</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <div class="container">
+      <h2>Proyek Pilihan</h2>
+      <p class="sub">Beberapa karya yang pernah saya kerjakan.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb t1">🛒</div>
+          <div class="card-body">
+            <h3>Toko Online</h3>
+            <p>Situs e-commerce dengan keranjang belanja dan pembayaran terintegrasi.</p>
+            <div class="chips"><span>React</span><span>Node.js</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t2">📊</div>
+          <div class="card-body">
+            <h3>Dashboard Analitik</h3>
+            <p>Dashboard interaktif untuk memantau data penjualan secara real-time.</p>
+            <div class="chips"><span>JavaScript</span><span>Chart.js</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t3">📝</div>
+          <div class="card-body">
+            <h3>Aplikasi Catatan</h3>
+            <p>Aplikasi pencatat sederhana dengan penyimpanan lokal dan mode gelap.</p>
+            <div class="chips"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="pengalaman">
+    <div class="container">
+      <h2>Pengalaman &amp; Pendidikan</h2>
+      <p class="sub">Perjalanan karier dan belajar saya.</p>
+      <div class="timeline">
+        <div class="item">
+          <small>2024 – Sekarang</small>
+          <h3>Frontend Developer — PT Contoh Digital</h3>
+          <p>Mengembangkan dan memelihara antarmuka web untuk berbagai klien.</p>
+        </div>
+        <div class="item">
+          <small>2022 – 2024</small>
+          <h3>Freelance Web Developer</h3>
+          <p>Membuat situs profil perusahaan dan toko online untuk UMKM.</p>
+        </div>
+        <div class="item">
+          <small>2018 – 2022</small>
+          <h3>S1 Teknik Informatika — Universitas Contoh</h3>
+          <p>Fokus pada pengembangan web dan rekayasa perangkat lunak.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="container">
+      <h2>Hubungi Saya</h2>
+      <p class="sub">Punya proyek atau sekadar ingin menyapa? Kirim pesan.</p>
+      <form id="form">
+        <input type="text" id="nama" placeholder="Nama Anda" required>
+        <input type="email" id="email" placeholder="Email Anda" required>
+        <textarea id="pesan" placeholder="Pesan Anda" required></textarea>
+        <button class="btn primary" type="submit">Kirim Pesan</button>
+      </form>
+      <div class="social">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:email@contoh.com">email@contoh.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">© <span id="tahun"></span> Nama Anda. Dibuat dengan HTML, CSS &amp; JavaScript.</div>
+</footer>
+
+<script>
+  document.getElementById('tahun').textContent = new Date().getFullYear();
+
+  // Ganti tema gelap/terang
+  const root = document.documentElement;
+  const btn = document.getElementById('theme');
+  btn.addEventListener('click', () => {
+    const light = root.getAttribute('data-theme') === 'light';
+    root.setAttribute('data-theme', light ? 'dark' : 'light');
+    btn.textContent = light ? '🌙' : '☀️';
+  });
+
+  // Formulir kontak: membuka aplikasi email dengan pesan terisi
+  document.getElementById('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const n = encodeURIComponent(document.getElementById('nama').value);
+    const m = encodeURIComponent(document.getElementById('pesan').value);
+    window.location.href = `mailto:email@contoh.com?subject=Pesan dari ${n}&body=${m}`;
+  });
+</script>
+</body>
+</html>
